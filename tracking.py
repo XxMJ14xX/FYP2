@@ -28,15 +28,19 @@ time.sleep(2)
 cap = cv2.VideoCapture(1)
 cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
 cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
-cap.set(cv2.CAP_PROP_FPS, 20)
+cap.set(cv2.CAP_PROP_FPS, 30)
 
-# Specify the TensorFlow model and labels
+# Specify the TensorFlow model
 script_dir = pathlib.Path(__file__).parent.absolute()
-model_file = os.path.join(script_dir, './models (edgetpu)/sunny_edgetpu.tflite')
+model_file = os.path.join(script_dir, 'ssd_mobilenet_v2_face_quant_postprocess_edgetpu.tflite')
 
 # Initialize the TF interpreter
 interpreter = edgetpu.make_interpreter(model_file)
 interpreter.allocate_tensors()
+
+input_size = common.input_size(interpreter)
+in_w, in_h = input_size
+
 output_details = interpreter.get_output_details()
 
 try:
@@ -49,34 +53,45 @@ try:
             break
 
         # Resize the frame
-        size = common.input_size(interpreter)
-        image = cv2.resize(frame, size)
+        image = cv2.resize(frame, input_size)
 
         # Run an inference
         common.set_input(interpreter, image)
         interpreter.invoke()
+        
         classes = classify.get_classes(interpreter, top_k=1)
 
         objs = detect.get_objects(interpreter, 0.4, [1, 1])
 
         output_tensor = interpreter.get_tensor(output_details[0]['index'])
-        # print(output_tensor.shape, output_tensor)
+        
         num_detections = len(output_tensor[0])
+
+        img_h, img_w, c = image.shape
+
+        x_scale = img_w/in_w
+        y_scale = img_h/in_h
 
         for obj in objs:
             print("obj")
-            # print(labels.get(obj.id, obj.id))
             print('  id:    ', obj.id)
             print('  score: ', obj.score)
             print('  bbox:  ', obj.bbox)
 
-            cv2.rectangle(frame, (obj.bbox.xmin, obj.bbox.xmax), (obj.bbox.ymin, obj.bbox.ymax), (0, 255, 0), 2)
+            x1 = obj.bbox.xmin * x_scale
+            y1 = obj.bbox.ymin * y_scale
+
+            x2 = obj.bbox.xmax * x_scale
+            y2 = obj.bbox.ymax * y_scale
+
+            cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 2)
 
         print("Inference Time: ", (time.perf_counter_ns() - st) * 1e-6)
 
         if len(objs) >= 1:
             # Get center of bbox and center of frame
             center_frame = frame.shape[1] / 2
+            
             center_obj = (objs[0].bbox.xmin + objs[0].bbox.xmax) / 2
 
             # Get the offset and correction from controller
