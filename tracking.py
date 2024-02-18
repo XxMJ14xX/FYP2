@@ -85,7 +85,8 @@ try:
             x2 = int(obj.bbox.xmax * x_scale)
             y2 = int(obj.bbox.ymax * y_scale)
 
-            cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 2)
+            #cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 2)
+            cv2.rectangle(frame, (obj.bbox.xmin*2, int(obj.bbox.ymin*1.5)), (obj.bbox.xmax*2, int(obj.bbox.ymax*1.5)), (0, 255, 0), 2)
 
         print("Inference Time: ", (time.perf_counter_ns() - st) * 1e-6)
 
