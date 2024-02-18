@@ -105,9 +105,9 @@ try:
             print(corr, error, pwm.duty_cycle)
 
         # Display the output frame on the screen
-        #cv2.imshow('Object Detection', frame)
-        pil_image = Image.fromarray(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
-        pil_image.show()
+        cv2.imshow('Object Detection', frame)
+        #pil_image = Image.fromarray(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
+        #pil_image.show()
         if cv2.waitKey(1) == ord('q'):
             break
 except KeyboardInterrupt:
