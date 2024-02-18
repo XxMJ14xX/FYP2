@@ -10,6 +10,7 @@ from pycoral.utils import dataset
 from pycoral.adapters import common
 from pycoral.adapters import classify
 from pycoral.adapters import detect
+from PIL import Image
 from PID import PID
 
 controller = PID(0.00005, 0, 0)
@@ -104,7 +105,9 @@ try:
             print(corr, error, pwm.duty_cycle)
 
         # Display the output frame on the screen
-        cv2.imshow('Object Detection', frame)
+        #cv2.imshow('Object Detection', frame)
+        pil_image = Image.fromarray(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
+        pil_image.show()
         if cv2.waitKey(1) == ord('q'):
             break
 except KeyboardInterrupt:
