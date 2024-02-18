@@ -79,11 +79,11 @@ try:
             print('  score: ', obj.score)
             print('  bbox:  ', obj.bbox)
 
-            x1 = obj.bbox.xmin * x_scale
-            y1 = obj.bbox.ymin * y_scale
+            x1 = int(obj.bbox.xmin * x_scale)
+            y1 = int(obj.bbox.ymin * y_scale)
 
-            x2 = obj.bbox.xmax * x_scale
-            y2 = obj.bbox.ymax * y_scale
+            x2 = int(obj.bbox.xmax * x_scale)
+            y2 = int(obj.bbox.ymax * y_scale)
 
             cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 2)
 
