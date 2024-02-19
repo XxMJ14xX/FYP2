@@ -40,7 +40,6 @@ interpreter.allocate_tensors()
 
 input_size = common.input_size(interpreter)
 in_w, in_h = input_size
-print(in_w , in_h)
 
 output_details = interpreter.get_output_details()
 
@@ -72,8 +71,6 @@ try:
 
         x_scale = img_w/in_w
         y_scale = img_h/in_h
-        print(x_scale)
-        print(y_scale)
 
         for obj in objs:
             print("obj")
@@ -87,8 +84,7 @@ try:
             x2 = int(obj.bbox.xmax * x_scale)
             y2 = int(obj.bbox.ymax * y_scale)
 
-            #cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 2)
-            cv2.rectangle(frame, (obj.bbox.xmin*2, int(obj.bbox.ymin*1.5)), (obj.bbox.xmax*2, int(obj.bbox.ymax*1.5)), (0, 255, 0), 2)
+            cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 2)
 
         print("Inference Time: ", (time.perf_counter_ns() - st) * 1e-6)
 
@@ -96,7 +92,6 @@ try:
             # Get center of bbox and center of frame
             center_frame = frame.shape[1] / 2
             
-            #center_obj = (objs[0].bbox.xmin + objs[0].bbox.xmax) / 2
             center_obj = (x1 + x2)/2
 
             # Get the offset and correction from controller
@@ -110,8 +105,6 @@ try:
 
         # Display the output frame on the screen
         cv2.imshow('Object Detection', frame)
-        #pil_image = Image.fromarray(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
-        #pil_image.show()
         if cv2.waitKey(1) == ord('q'):
             break
 except KeyboardInterrupt:
@@ -125,5 +118,3 @@ pwm.close()
 # Release the VideoCapture object and close the window
 cap.release()
 cv2.destroyAllWindows()
-
-print('ciao ciao')
