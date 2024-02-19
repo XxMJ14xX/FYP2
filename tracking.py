@@ -40,6 +40,7 @@ interpreter.allocate_tensors()
 
 input_size = common.input_size(interpreter)
 in_w, in_h = input_size
+print(in_w , in_h)
 
 output_details = interpreter.get_output_details()
 
@@ -67,7 +68,7 @@ try:
         
         num_detections = len(output_tensor[0])
 
-        img_h, img_w, c = image.shape
+        img_h, img_w, c = frame.shape
 
         x_scale = img_w/in_w
         y_scale = img_h/in_h
