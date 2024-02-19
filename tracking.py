@@ -10,7 +10,6 @@ from pycoral.utils import dataset
 from pycoral.adapters import common
 from pycoral.adapters import classify
 from pycoral.adapters import detect
-from PIL import Image
 from PID import PID
 
 controller = PID(0.00005, 0, 0)
@@ -72,6 +71,8 @@ try:
 
         x_scale = img_w/in_w
         y_scale = img_h/in_h
+        print(x_scale)
+        print(y_scale)
 
         for obj in objs:
             print("obj")
@@ -94,7 +95,8 @@ try:
             # Get center of bbox and center of frame
             center_frame = frame.shape[1] / 2
             
-            center_obj = (objs[0].bbox.xmin + objs[0].bbox.xmax) / 2
+            #center_obj = (objs[0].bbox.xmin + objs[0].bbox.xmax) / 2
+            center_obj = (x1 + x2)/2
 
             # Get the offset and correction from controller
             error = center_obj - center_frame
