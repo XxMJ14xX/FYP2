@@ -27,7 +27,7 @@ args = parser.parse_args()
 script_dir = pathlib.Path(__file__).parent.absolute()
 #model_file = os.path.join(script_dir, 'models-edgetpu/yolov5s-224-D1_edgetpu.tflite')
 label_file = os.path.join(script_dir, 'labelmap.txt')
-image_file = os.path.join(script_dir, 'image1.jpg')
+image_file = os.path.join(script_dir, 'image5.jpg')
 
 with open(label_file, 'r') as f:
     cfg = yaml.load(f, Loader=yaml.SafeLoader)
