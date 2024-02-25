@@ -132,7 +132,7 @@ if len(detections):
     wp = 2;
     wt = 0;
     #print(detections.iloc[[0:4,3]])
-    detections.columns;
+    detections.columns
     for c in np.unique(detections[:, -1]):
         n = (detections[:, -1] == c).sum()
         s += f"{n} {classes[int(c)]}{'s' * (n > 1)}, " 
