@@ -129,7 +129,7 @@ if len(detections):
     detections[:,:4] = scaled_coordinates
 
     s = ""
-    wb = 15;
+    wb = 10;
     wp = 2;
     wt = 0;
     
@@ -143,9 +143,9 @@ if len(detections):
     for index, row in detections_df.iterrows():
         class_det = row[5]
         if class_det == 0:
-            wt += 10
+            wt += wb
         elif class_det == 1:
-            wt += 2
+            wt += wp
         print("Total weight of camera " + wt)
         
     if s != "":
