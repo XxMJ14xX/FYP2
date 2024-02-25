@@ -146,7 +146,6 @@ if len(detections):
             wt += wb
         elif class_det == 1:
             wt += wp
-        print("Total weight of camera " , wt)
         
     if s != "":
         s = s.strip()
