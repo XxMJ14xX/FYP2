@@ -5,6 +5,7 @@ import pathlib
 import logging
 import argparse
 import numpy as np
+import pandas as pd
 import pycoral.utils.edgetpu as etpu
 from pycoral.adapters import common
 from nms import non_max_suppression
@@ -132,7 +133,8 @@ if len(detections):
     wp = 2;
     wt = 0;
     #print(detections.iloc[[0:4,3]])
-    detections.columns
+    detections_df = pd.DataFrame(detections)
+    print(detections_df)
     for c in np.unique(detections[:, -1]):
         n = (detections[:, -1] == c).sum()
         s += f"{n} {classes[int(c)]}{'s' * (n > 1)}, " 
