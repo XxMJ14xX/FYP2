@@ -143,6 +143,10 @@ if len(detections):
         elif c == 1:
             wt += 2
 
+    for index, row in detections_df.iterrows():
+        class_det = row[5]
+        print(class_det)
+        
     if s != "":
         s = s.strip()
         s = s[:-1]
