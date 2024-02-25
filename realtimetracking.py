@@ -128,17 +128,24 @@ if len(detections):
     detections[:,:4] = scaled_coordinates
 
     s = ""
-
+    wb = 15;
+    wp = 2;
+    wt = 0;
     for c in np.unique(detections[:, -1]):
         n = (detections[:, -1] == c).sum()
         s += f"{n} {classes[int(c)]}{'s' * (n > 1)}, " 
-        print(c)
+        if c = 0:
+            wt += 15
+        elif c = 1:
+            wt += 2
+        print(wt);
 
     if s != "":
         s = s.strip()
         s = s[:-1]
 
     logger.info("Detected: {}".format(s))
+    logger.info(wt)
     
 if(args.display):
     cv2.imshow("Detection", img)
