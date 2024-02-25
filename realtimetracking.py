@@ -151,8 +151,8 @@ if len(detections):
         s = s.strip()
         s = s[:-1]
 
+    print("Total weight of camera:" , wt)
     logger.info("Detected: {}".format(s))
-    logger.info("Total weight of camera: ",wt)
     
 if(args.display):
     cv2.imshow("Detection", img)
