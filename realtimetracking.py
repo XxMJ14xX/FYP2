@@ -138,7 +138,7 @@ if len(detections):
         s = s[:-1]
 
     logger.info("Detected: {}".format(s))
-    logger.info(s[0])
+    logger.info(s[1])
     
 if(args.display):
     cv2.imshow("Detection", img)
