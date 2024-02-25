@@ -12,7 +12,7 @@ from nms import non_max_suppression
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("EdgeTPUModel")
 
-parser = argparse.ArgumentParser("EdgeTPU test runner")
+parser = argparse.ArgumentParser("EdgeTPU test runner -m")
 
 parser.add_argument("--model", "-m", help="weights file", required=True)
 parser.add_argument("--image", "-i", type=str, help="Image file to run detection on")
