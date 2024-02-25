@@ -143,10 +143,10 @@ if len(detections):
     for index, row in detections_df.iterrows():
         class_det = row[5]
         if class_det == 0:
-            wt += 15
+            wt += 10
         elif class_det == 1:
             wt += 2
-        print(wt)
+        print("Total weight of camera " + wt)
         
     if s != "":
         s = s.strip()
