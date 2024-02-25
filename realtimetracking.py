@@ -19,7 +19,7 @@ parser.add_argument("--image", "-i", type=str, help="Image file to run detection
 parser.add_argument("--display", "-d", action='store_true', help="Display detection on monitor")
 parser.add_argument("--stream", "-s", action='store_true', help="Process video stream in real-time")
 parser.add_argument("--conf", "-ct", type=float, default=0.5, help="Detection confidence threshold")
-parser.add_argument("--iou", "-it", type=float, defualt=0.1, help="Detections IOU threshold")
+parser.add_argument("--iou", "-it", type=float, default=0.1, help="Detections IOU threshold")
 
 args = parser.parse_args()
 
